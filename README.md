@@ -85,4 +85,6 @@ git push origin v1.0.1
 
 ## 下载目录
 
-视频文件保存在 `downloadFiles` 目录。
+视频文件保存在用户 Downloads 目录下的 `BanYun-Dramaverse` 子文件夹：
+- Mac: `~/Downloads/BanYun-Dramaverse/`
+- Windows: `C:\Users\用户名\Downloads\BanYun-Dramaverse\`

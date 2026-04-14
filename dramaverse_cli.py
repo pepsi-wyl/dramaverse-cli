@@ -12,7 +12,7 @@ load_dotenv()
 
 # ==================== 配置区 ====================
 VERSION = "v1.0.0"
-OUTPUT_DIR = "downloadFiles"
+OUTPUT_DIR = os.path.expanduser("~/Downloads/BanYun-Dramaverse")
 
 # 凭证配置（从环境变量读取，如未设置则使用默认值）
 # 本地使用: 设置环境变量 DRAMAVERSE_USER_ID, DRAMAVERSE_ROLE_ID, DRAMAVERSE_TOKEN
