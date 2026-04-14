@@ -6,6 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:  # 手动触发
 
+permissions:
+  contents: write  # 允许创建 Release
+
 jobs:
   build-mac-arm64:
     runs-on: macos-latest
