@@ -42,8 +42,8 @@ jobs:
           # 创建启动脚本
           cat > BanYun-Dramaverse.app/Contents/MacOS/launcher << 'EOF'
           #!/bin/bash
-          DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-          osascript -e 'tell application "Terminal" to do script "'"cd '$DIR' && ./Contents/MacOS/BanYun-Dramaverse"'"
+          EXEC_PATH="$(cd "$(dirname "$0")" && pwd)/BanYun-Dramaverse"
+          open -a Terminal "$EXEC_PATH"
           EOF
           chmod +x BanYun-Dramaverse.app/Contents/MacOS/launcher
 
@@ -107,8 +107,8 @@ jobs:
           # 创建启动脚本
           cat > BanYun-Dramaverse.app/Contents/MacOS/launcher << 'EOF'
           #!/bin/bash
-          DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-          osascript -e 'tell application "Terminal" to do script "'"cd '$DIR' && ./Contents/MacOS/BanYun-Dramaverse"'"
+          EXEC_PATH="$(cd "$(dirname "$0")" && pwd)/BanYun-Dramaverse"
+          open -a Terminal "$EXEC_PATH"
           EOF
           chmod +x BanYun-Dramaverse.app/Contents/MacOS/launcher
 
