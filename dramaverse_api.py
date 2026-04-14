@@ -10,6 +10,12 @@ import json
 import urllib.request
 import urllib.error
 import os
+import ssl
+
+# 解决打包后 SSL 证书问题
+ssl_context = ssl.create_default_context()
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
 
 
 class DramaverseMediaUtil:
@@ -144,7 +150,7 @@ class DramaverseAPI:
                 method='POST'
             )
 
-            with urllib.request.urlopen(req) as response:
+            with urllib.request.urlopen(req, context=ssl_context) as response:
                 response_data = response.read().decode('utf-8')
 
             if self.verbose:
@@ -331,7 +337,7 @@ class DramaverseAPI:
                 'User-Agent': 'okhttp/4.12.0',
             })
 
-            with urllib.request.urlopen(req) as response:
+            with urllib.request.urlopen(req, context=ssl_context) as response:
                 total_size = int(response.headers.get('Content-Length', 0))
                 downloaded = 0
 

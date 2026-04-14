@@ -12,15 +12,35 @@ ByteDrama 短剧查询与下载命令行工具。
 
 ## 下载
 
-从 [Releases](../../releases) 页面下载对应平台的可执行文件：
+从 [Releases](../../releases) 页面下载对应平台的文件：
 
 | 文件 | 适用平台 |
 |-----|---------|
-| `BanYun-Dramaverse-arm64` | Mac M1/M2/M3/M4 |
-| `BanYun-Dramaverse-x64` | Mac Intel |
+| `BanYun-Dramaverse-arm64.zip` | Mac M1/M2/M3/M4/M5 |
+| `BanYun-Dramaverse-x64.zip` | Mac Intel |
 | `BanYun-Dramaverse.exe` | Windows |
 
 ## 使用
+
+### Mac 用户
+
+1. 解压下载的 `.zip` 文件
+2. 将 `BanYun-Dramaverse.app` 拖到 Applications（或其他目录）
+3. **首次使用必须运行以下命令**（绕过 macOS 安全检查）：
+   ```bash
+   xattr -cr /Applications/BanYun-Dramaverse.app
+   ```
+4. 将 `.env` 配置文件放到 `.app` 同目录（如 `/Applications/.env`）
+5. 双击 `BanYun-Dramaverse.app` 即可运行（自动打开终端）
+
+### Windows 用户
+
+在命令行运行：
+```cmd
+BanYun-Dramaverse.exe
+```
+
+`.env` 文件放在 exe 同目录。
 
 ### 配置凭证
 
