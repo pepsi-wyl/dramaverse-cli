@@ -70,9 +70,7 @@ jobs:
           EOF
 
           # 打包成 zip
-          cd ..
-          zip -r BanYun-Dramaverse-arm64.zip Dramaverse/BanYun-Dramaverse.app
-          mv BanYun-Dramaverse-arm64.zip Dramaverse/dist/
+          zip -r dist/BanYun-Dramaverse-arm64.zip BanYun-Dramaverse.app
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -137,9 +135,7 @@ jobs:
           EOF
 
           # 打包成 zip
-          cd ..
-          zip -r BanYun-Dramaverse-x64.zip Dramaverse/BanYun-Dramaverse.app
-          mv BanYun-Dramaverse-x64.zip Dramaverse/dist/
+          zip -r dist/BanYun-Dramaverse-x64.zip BanYun-Dramaverse.app
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
