@@ -29,13 +29,56 @@ jobs:
           pip install pyinstaller
 
       - name: Build Mac ARM64
-        run: pyinstaller --onefile --name "BanYun-Dramaverse-arm64" --console dramaverse_cli.py
+        run: |
+          pyinstaller --onefile --name "BanYun-Dramaverse" --console dramaverse_cli.py
+
+          # 创建 .app 结构
+          mkdir -p BanYun-Dramaverse.app/Contents/MacOS
+          mkdir -p BanYun-Dramaverse.app/Contents/Resources
+
+          # 移动可执行文件
+          mv dist/BanYun-Dramaverse BanYun-Dramaverse.app/Contents/MacOS/
+
+          # 创建启动脚本
+          cat > BanYun-Dramaverse.app/Contents/MacOS/launcher << 'EOF'
+          #!/bin/bash
+          DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+          osascript -e 'tell application "Terminal" to do script "'"cd '$DIR' && ./Contents/MacOS/BanYun-Dramaverse"'"
+          EOF
+          chmod +x BanYun-Dramaverse.app/Contents/MacOS/launcher
+
+          # 创建 Info.plist
+          cat > BanYun-Dramaverse.app/Contents/Info.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>launcher</string>
+              <key>CFBundleName</key>
+              <string>BanYun Dramaverse</string>
+              <key>CFBundleDisplayName</key>
+              <string>BanYun Dramaverse</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.banyun.dramaverse</string>
+              <key>CFBundleVersion</key>
+              <string>1.0.0</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+          </dict>
+          </plist>
+          EOF
+
+          # 打包成 zip
+          cd ..
+          zip -r BanYun-Dramaverse-arm64.zip Dramaverse/BanYun-Dramaverse.app
+          mv BanYun-Dramaverse-arm64.zip Dramaverse/dist/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mac-arm64
-          path: dist/BanYun-Dramaverse-arm64
+          path: dist/BanYun-Dramaverse-arm64.zip
 
   build-mac-x64:
     runs-on: macos-15-intel  # Intel Mac runner (支持到2027年)
@@ -53,13 +96,56 @@ jobs:
           pip install pyinstaller
 
       - name: Build Mac x64
-        run: pyinstaller --onefile --name "BanYun-Dramaverse-x64" --console dramaverse_cli.py
+        run: |
+          pyinstaller --onefile --name "BanYun-Dramaverse" --console dramaverse_cli.py
+
+          # 创建 .app 结构
+          mkdir -p BanYun-Dramaverse.app/Contents/MacOS
+          mkdir -p BanYun-Dramaverse.app/Contents/Resources
+
+          # 移动可执行文件
+          mv dist/BanYun-Dramaverse BanYun-Dramaverse.app/Contents/MacOS/
+
+          # 创建启动脚本
+          cat > BanYun-Dramaverse.app/Contents/MacOS/launcher << 'EOF'
+          #!/bin/bash
+          DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+          osascript -e 'tell application "Terminal" to do script "'"cd '$DIR' && ./Contents/MacOS/BanYun-Dramaverse"'"
+          EOF
+          chmod +x BanYun-Dramaverse.app/Contents/MacOS/launcher
+
+          # 创建 Info.plist
+          cat > BanYun-Dramaverse.app/Contents/Info.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>launcher</string>
+              <key>CFBundleName</key>
+              <string>BanYun Dramaverse</string>
+              <key>CFBundleDisplayName</key>
+              <string>BanYun Dramaverse</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.banyun.dramaverse</string>
+              <key>CFBundleVersion</key>
+              <string>1.0.0</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+          </dict>
+          </plist>
+          EOF
+
+          # 打包成 zip
+          cd ..
+          zip -r BanYun-Dramaverse-x64.zip Dramaverse/BanYun-Dramaverse.app
+          mv BanYun-Dramaverse-x64.zip Dramaverse/dist/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: mac-x64
-          path: dist/BanYun-Dramaverse-x64
+          path: dist/BanYun-Dramaverse-x64.zip
 
   build-windows:
     runs-on: windows-latest
@@ -99,18 +185,20 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/mac-arm64/BanYun-Dramaverse-arm64
-            dist/mac-x64/BanYun-Dramaverse-x64
+            dist/mac-arm64/BanYun-Dramaverse-arm64.zip
+            dist/mac-x64/BanYun-Dramaverse-x64.zip
             dist/windows/BanYun-Dramaverse.exe
           body: |
             ## BanYun Dramaverse CLI
 
             ### 下载说明
-            - **Mac ARM64**: M1/M2/M3/M4 芯片
-            - **Mac x64**: Intel 芯片
-            - **Windows**: Windows 10/11
+            - **Mac ARM64**: M1/M2/M3/M4/M5 芯片（双击 .app 即可运行）
+            - **Mac x64**: Intel 芯片（双击 .app 即可运行）
+            - **Windows**: Windows 10/11（命令行运行）
 
             ### 使用方法
-            1. 下载对应平台的可执行文件
-            2. 运行程序后输入 API 凭证
-            3. 凭证获取请联系 Dramaverse 团队
+            1. 下载对应平台的文件
+            2. Mac 用户解压后双击 BanYun-Dramaverse.app
+            3. Windows 用户在命令行运行 exe 文件
+            4. 配置 `.env` 文件或输入 API 凭证
+            5. 凭证获取请联系 Dramaverse 团队
