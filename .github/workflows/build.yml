@@ -32,7 +32,7 @@ jobs:
           path: dist/BanYun-Dramaverse-arm64
 
   build-mac-x64:
-    runs-on: macos-13  # Intel Mac runner
+    runs-on: macos-14-large  # Intel Mac runner
     steps:
       - uses: actions/checkout@v4
 
