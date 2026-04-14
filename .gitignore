@@ -1,0 +1,21 @@
+# 敏感文件
+.env
+
+# 打包临时文件
+build/
+dist/
+*.spec
+
+# 下载文件
+downloadFiles/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
