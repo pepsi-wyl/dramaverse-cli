@@ -22,37 +22,23 @@ ByteDrama 短剧查询与下载命令行工具。
 
 ## 使用
 
-### 首次运行
-
-程序启动后会提示输入 API 凭证：
-- User ID
-- Role ID
-- Token
-
-凭证获取请联系 Dramaverse 团队。
-
-### 设置环境变量（可选）
-
-```bash
-# Mac/Linux
-export DRAMAVERSE_USER_ID=你的ID
-export DRAMAVERSE_ROLE_ID=你的ID
-export DRAMAVERSE_TOKEN=你的Token
-
-# Windows
-set DRAMAVERSE_USER_ID=你的ID
-set DRAMAVERSE_ROLE_ID=你的ID
-set DRAMAVERSE_TOKEN=你的Token
-```
-
-### 或创建配置文件
+### 配置凭证
 
 复制 `.env.example` 为 `.env` 并填入凭证：
 
 ```bash
 cp .env.example .env
-# 编辑 .env 文件
 ```
+
+`.env` 文件内容：
+
+```
+DRAMAVERSE_USER_ID=你的ID
+DRAMAVERSE_ROLE_ID=你的ID
+DRAMAVERSE_TOKEN=你的Token
+```
+
+凭证获取请联系 Dramaverse 团队。
 
 ## 本地开发
 
