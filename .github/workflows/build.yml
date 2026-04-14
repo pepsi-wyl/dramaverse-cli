@@ -192,9 +192,41 @@ jobs:
             - **Mac x64**: Intel 芯片（双击 .app 即可运行）
             - **Windows**: Windows 10/11（命令行运行）
 
+            ### 配置凭证
+
+            **Mac 用户**（永久设置）：
+
+            先检测你的 shell 类型：
+            ```bash
+            basename "$SHELL"
+            ```
+            输出 `zsh` 或 `bash`
+
+            **zsh 用户**（Mac 默认）：
+            ```bash
+            echo 'export DRAMAVERSE_USER_ID="你的ID"' >> ~/.zshrc
+            echo 'export DRAMAVERSE_ROLE_ID="你的ID"' >> ~/.zshrc
+            echo 'export DRAMAVERSE_TOKEN="你的Token"' >> ~/.zshrc
+            source ~/.zshrc
+            ```
+
+            **bash 用户**：
+            ```bash
+            echo 'export DRAMAVERSE_USER_ID="你的ID"' >> ~/.bash_profile
+            echo 'export DRAMAVERSE_ROLE_ID="你的ID"' >> ~/.bash_profile
+            echo 'export DRAMAVERSE_TOKEN="你的Token"' >> ~/.bash_profile
+            source ~/.bash_profile
+            ```
+
+            **Windows 用户**（永久设置）：
+            ```cmd
+            setx DRAMAVERSE_USER_ID "你的ID"
+            setx DRAMAVERSE_ROLE_ID "你的ID"
+            setx DRAMAVERSE_TOKEN "你的Token"
+            ```
+            重启 CMD/PowerShell 后生效。
+
             ### 使用方法
             1. 下载对应平台的文件
             2. Mac 用户解压后双击 BanYun-Dramaverse.app
             3. Windows 用户在命令行运行 exe 文件
-            4. 配置 `.env` 文件或输入 API 凭证
-            5. 凭证获取请联系 Dramaverse 团队
